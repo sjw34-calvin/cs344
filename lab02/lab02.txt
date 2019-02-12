@@ -1,0 +1,59 @@
+Exercise 2.1
+
+a. Which of the local search algorithms solves the problem? How well does each algorithm do?
+Hill-climbing solution and Simulated annealing solution both find the solutions to the problem.
+
+b. Which algorithm works more quickly?
+Hill-climbing works a lot faster than annealing.
+
+c. Does the starting value for x make any difference? Why or why not?
+The x value is randomly generated each time, which causes variance in the times a little bit but hill-climbing is still faster.
+
+d. What affect does changing the delta step value make on each algorithm? Why?
+It does not have any effect. The values appear to be similar to what they were.
+
+e. What is the purpose of the exp_schedule() method in the simulated annealing function call?
+Gives you the lambda value so it predicts when it will jump.
+
+Exercise 2.2
+
+
+a) How do each of the algorithms do on this problem space? Why?
+it depends on where they start but the initial solution and simulated annealing can result in better searches because they are not limited by only moving forward if there is a better solution.
+
+b) Does the starting value make any difference here?
+The starting value only makes a difference for annealing.
+
+c) Does modifying the step size (i.e., delta) affect the operation of the two algorithms? Why or why not?
+It does not seem to have any effect.
+
+d) What are the maximum and minimum possible values here, and how do the two algorithms score with respect to them?
+the minimum value possible is 0 because it never goes below that but the maximum value possible are each of the local maxima's depending on the initial x-value.
+
+Exercise 2.3
+
+a) How does each algorithm do with these restarts? Why?
+The algorithms pretty much behave the same. The answers are right around ~15 which is not too surprising.
+
+b) What are the average values of the runs for each of the algorithms?
+The average values are:
+initial: 8.6255239
+hill-climbing: 17.5839243989
+Simulated annealing: 8.8000207573744649
+
+c) If one of the algorithms does better, explain why; if not, explain why not.
+I think that hill-climb does better than the other ones when it gets the right x value because it seems to find a local maxima every single time whereas,
+simulated annealing and initial do not find a local maxima every time because they will move even if its not the best possible solution.
+
+Exercise 2.4:
+
+a) For which algorithm does beam search make the most sense?
+Since the hill climbing algorithm is finding the local maxima every time it makes the most sense because
+beam search only keeps a pre-determined number of best partial solutions as candidates.
+It won't make a lot of sense for annealing because it will move forward without have the best possible solution
+
+b) How many solutions could you maintain with reasonable space and time constraints?
+Infinitely many because local searches don't require a lot of memory.
+
+c) How would you modify the code to implement beam search? How is it different from random restarts, if at all?
+Take the current x value and run it for a range of x values but only keep the best values. Then move forward with the best x values.
