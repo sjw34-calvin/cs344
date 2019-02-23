@@ -1,0 +1,17 @@
+a. Drug Testing
+    i) P(User) = 8.9%
+    ii) P(test|user) = 0.99
+    iii) P(-test|user) = 0.01
+    iv) P(test|user) = 0.02
+    v) P(User|test) = (P(test|user) * P(user)) / P(test)
+                    = (P(test|user) * P(user)) / (P(test|user) * P(user) + P(test|non-user) * P(non-user))
+                    = (.99 * 0.089) / (.99 * 0.089 + 0.911 * 0.02)
+                    = 0.829
+b. Breast Cancer
+    1) P(Cancer|test) = (P(test|Cancer) * P(Cancer)) / P(test)
+                      = (P(test|Cancer) * P(Cancer)) / (P(test|Cancer) * P(Cancer) + P(test|non-cancer) * P(non-cancer))
+                      = (.80 * 0.01) / (.80 * 0.01 + 0.096 * 0.99)
+                      = 0.0776
+
+Chances she has cancer based on a positive result = 0.0776
+Chances she does not have cancer  = 1-0.0776 = 0.9924
