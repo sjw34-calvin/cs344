@@ -1,0 +1,42 @@
+Sameer Mall
+(Partner: Sarah Hendriksen)
+CS 344
+03/08/19
+Lab 06 - Exercise 1
+
+Email Filter Example
+
+1) We want the machine learning model to be able to predict how likely an email is important to the user.
+
+2) Our ideal outcome is to separate emails that have a higher probability of being important (i.e ones that the user has
+responded to or clicked on a link etc) to the user from those that are spam emails.
+
+3) A success metric is the number of important or worthwhile emails(ones they have responded to) predicted by the model.
+Success means predicting 95% of the important emails and ignoring the spam emails. Failure means the number predicted
+important emails is no better than the current heuristics.
+
+4) We want the model to give a label as to if the email is important or spam. The ideal outcome is these predictions
+would tell the user which emails are worth their time and which ones aren't. We can obtain examples for training data by
+giving sample sets of emails that users have responded to and the ones they have ignored. These can be labeled worth while
+and spam respectively.
+
+5) We want to predict the emails importance (if its worth while to the user) in real time as soon as it is received.
+The outcome will help determine the categorization of the email.
+
+6) Consider previous emails that the user has received and has responded to. Assume that emails from that particular sender
+will also be important in the future.
+
+7) Our problem is best framed as a binary classification, which predicts whether an email will be one of the two classes
+{worthwhile, spam} - when it is first received.
+(This is already a binary classification)
+
+8) Subject                Sender              Documents           Links                Output (label)
+------------------------------------------------------------------------------------------------------
+Course Registration     Registrar           One Document        2 Links              Worthwhile
+------------------------------------------------------------------------------------------------------
+Free Cruise to Bahamas  FreeCruises.net     Zero                10                   Spam
+
+9) We applied the labels {worthwhile, spam} to each email that was received. This was determined by whether the user responded,
+clicked on a link, opened the document and seeing how many question marks there were, which the user had to respond to.
+
+10) Sender and the number of attached documents.

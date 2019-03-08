@@ -1,0 +1,17 @@
+Sameer Mall
+CS 344
+03/08/19
+Lab 06 - Exercise 2
+
+Remainder(Hungry) = 7/12 * Entropy(Hungry) + 5/12 * Entropy(Not Hungry)
+
+                  = 7/12 * -( 2 * (1/2)  * lg2(1/2)) + 5/12 * -(2 * (1/2) * lg2(1/2)))
+
+                  = 7/12 * 1 + 5/12 * 1
+
+                  = 1
+
+Information gained = 1 - 1 = 0
+
+Information gained is like Type where it does not give us any relevant information. The better question is Patrons which
+tells us more about who wants to stay and who wants to leave.
