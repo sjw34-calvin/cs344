@@ -1,0 +1,96 @@
+Sameer Mall
+Lab 07_4
+03/15/19
+
+Questions:
+
+a.    Submit solutions to tasks 1–5.
+Task 1:
+median_income is on a scale from about 1 to 15. This doesn't really mean anything to us at all. It doesn't mention anywhere either as to what those
+values could mean.
+maximum of the median_house_value is 500.0 which seems like it is just a pre-set value
+rooms_per_person seems fairly accurate as it's generally in the 2 range but then we also get 55.2 and 18.3, which seem highly unlikely.
+
+Task 2:
+The training data set roughly gives the map of california whereas the validation set does not give that shape at all. This is because
+for any given feature or column, the distribution of values between the train and validation splits should be roughly equal.
+This is not the case and hints at a fault in the way that our train and validation split was created.
+
+Task 3:
+Where the data is imported and pre-processed the line to randomize the data is commented out. So the data is not randomized prior to splitting the data.
+If we don't randomize the data properly before creating training and validation splits, then we may be in trouble if the
+data is given to us in some sorted order, which appears to be the case here.
+
+Task 4:
+# 1. Create input functions.
+training_input_fn = lambda: my_input_fn(
+  training_examples,
+  training_targets["median_house_value"],
+  batch_size=batch_size)
+predict_training_input_fn = lambda: my_input_fn(
+  training_examples,
+  training_targets["median_house_value"],
+  num_epochs=1,
+  shuffle=False)
+predict_validation_input_fn = lambda: my_input_fn(
+  validation_examples, validation_targets["median_house_value"],
+  num_epochs=1,
+  shuffle=False)
+
+# 2. Take a break and compute predictions.
+training_predictions = linear_regressor.predict(input_fn=predict_training_input_fn)
+training_predictions = np.array([item['predictions'][0] for item in training_predictions])
+
+validation_predictions = linear_regressor.predict(input_fn=predict_validation_input_fn)
+validation_predictions = np.array([item['predictions'][0] for item in validation_predictions])
+
+linear_regressor = train_model(
+    # TWEAK THESE VALUES TO SEE HOW MUCH YOU CAN IMPROVE THE RMSE
+    learning_rate=0.00003,
+    steps=5000,
+    batch_size=5,
+    training_examples=training_examples,
+    training_targets=training_targets,
+    validation_examples=validation_examples,
+    validation_targets=validation_targets)
+
+Final RMSE on training data: 171.29
+
+Task 5:
+california_housing_test_data = pd.read_csv("https://download.mlcc.google.com/mledu-datasets/california_housing_test.csv", sep=",")
+test_examples = preprocess_features(california_housing_test_data)
+test_targets = preprocess_targets(california_housing_test_data)
+
+predict_test_input_fn = lambda: my_input_fn(
+      test_examples,
+      test_targets["median_house_value"],
+      num_epochs=1,
+      shuffle=False)
+
+test_predictions = linear_regressor.predict(input_fn=predict_test_input_fn)
+test_predictions = np.array([item['predictions'][0] for item in test_predictions])
+
+root_mean_squared_error = math.sqrt(
+    metrics.mean_squared_error(test_predictions, test_targets))
+
+print("Final RMSE (on test data): %0.2f" % root_mean_squared_error)
+
+Final RMSE (on test data): 163.75
+
+How does your test performance compare to the validation performance? What does this say about the generalization performance of your model?
+The results are pretty similar as the bottom of the test performance curve does hit close to 163.75. This basically says that the generalization is valid.
+
+
+b.    Give a one-paragraph summary of what you learned about using training, validation and testing data sets.
+I learned that it is important to randomize the training data prior to splitting the data otherwise the training set will not match the validation set.
+Hyper parameters are important because you can use them to put all the code in a single function and then easily manipulate a single variable to test your
+data. It is also important to deal with any outliers in the data as they can greatly skew the overall model. Also, remember to test your data set against
+another data set or a subset of a data set to see if the learning data is valid.
+
+
+
+
+
+
+
+

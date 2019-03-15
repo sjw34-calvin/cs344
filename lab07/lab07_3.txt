@@ -1,0 +1,45 @@
+Sameer Mall
+Lab 07_3
+03/15/19
+
+Questions:
+
+a.    Submit solutions to tasks 1–3.
+    Task 1:
+california_housing_dataframe["rooms_per_person"] = (
+    california_housing_dataframe["total_rooms"] / california_housing_dataframe["population"])
+
+calibration_data = train_model(
+    learning_rate=0.00005,
+    steps=500,
+    batch_size=5,
+    input_feature="rooms_per_person"
+)
+Final RMSE (on training data): 237.28
+
+    Task 2:
+plt.figure(figsize=(15, 6))
+plt.subplot(1, 2, 1)
+plt.scatter(calibration_data["predictions"], calibration_data["targets"])
+
+The calibration data shows most scatter points aligned to a line. The line if almost vertical, but there are also a few outliers.
+
+    Task 3:
+california_housing_dataframe["rooms_per_person"] = (
+    california_housing_dataframe["rooms_per_person"]).apply(lambda x: min(x, 6))
+
+_ = california_housing_dataframe["rooms_per_person"].hist()
+
+The scatter plot in task 2 shows that most of the outliers are less than 6. So I plotted a histogram with a max value of 6.
+
+b.    What is the purpose of introducing synthetic features?
+The purpose of synthetic features is to see how two variables are related and how those two variables affect a third variable, that you would like
+to add to your data frame.
+In this case, block density relates to median house value by taking the ratio of total_rooms and population.
+
+c.    What are outliers and what is typically done with them?
+Outliers are values that do not fit the general pattern of a data in a scatter plot. They are firstly identified, which can easily be
+done just by looking at the graph. Then you further improve the model by clipping the outliers (i.e. setting the outlier values to some reasonable
+minimum or maximum).
+When I ran the verify code block down below (in the online exercise) the RMSE went down to: Final RMSE (on training data): 108.30
+A significant improvement from 237.28

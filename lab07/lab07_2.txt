@@ -1,0 +1,43 @@
+Sameer Mall
+Lab 07_2
+03/15/19
+
+Questions:
+
+a)    Compare and contrast categorical vs numerical data
+Categorical data: Data that is textual. In this example there is no categorical data but an example would be: house color, construction material etc.
+Numerical data: Data that is numbered and that you want to treat as a number. i.e area, total rooms etc.
+b)    Submit solutions to tasks 1–2. Include your best hyper-parameter values and the resulting RMSE, but not the training output.
+Task 1:
+train_model(
+    learning_rate=0.00002,
+    steps=450,
+    batch_size=3
+)
+Final RMSE (on training data): 0.20
+
+Task 2:
+train_model(
+    learning_rate=0.00002,
+    steps=450,
+    batch_size=3,
+    input_feature="population"
+)
+Final RMSE (on training data): 0.13
+Slightly better when total_rooms feature is replaced with the population feature.
+
+c)    What are the hyper-parameters learned in these exercises and is there a “standard” tuning algorithm for them?
+Hyperparameters are useful because you can put all the code in a single function. You can call the function with different parameters to see the effect.
+Standard turing: There is not a set way of tuning as the effects of different hyperparameters are data dependent. You just have to test the parameters on
+your data.
+Few rules to help guide:
+1) Training error should steadily decrease, steeply at first, and it should eventually plateau.
+2) If the training has not converged, run it for longer.
+3) If the training error decreases too slowly, increasing the learning rate may help it decrease faster.
+        But sometimes the exact opposite may happen if the learning rate is too high.
+4) If the training error varies wildly, try decreasing the learning rate.
+        Lower learning rate plus larger number of steps or larger batch size is often a good combination.
+5) Very small batch sizes can also cause instability. First try larger values like 100 or 1000, and decrease until you see degradation.
+
+Again, never go strictly by these rules of thumb, because the effects are data dependent. Always experiment and verify.
+

@@ -1,0 +1,26 @@
+Sameer Mall
+Lab 07_1
+03/15/19
+
+Questions:
+
+a)    Submit your solutions to exercises 1–2.
+
+Exercise 1:
+cities['Named after a saint and greater than 50 miles'] = (cities['Area square miles'] > 50) & cities['City name'].apply(lambda name: name.startswith('San'))
+cities
+
+Exercise 2:
+cities.reindex([0, 1, 3, 2, 5])
+So when I include values that are not in the original index values, reindex will just add new rows for these non-existent
+values and populate them with NaN.
+In this case, allowing non-existent indices makes it easy to reindex using an external list, as you don't have to worry about
+cleaning up your data or worry about conflicts?
+
+b)    Why would one use Pandas rather than the standard data manipulation features provided by NumPy?
+Pandas allows a great reindexing method that allows you to add new rows for missing indices and populate those rows with Nan values.
+
+c)    Under what circumstances would it be useful to reorder/shuffle a Pandas DataFrame?
+Once you create a data frame the index values are stable so if you wanted to randomize the data then the reorder/shuffle
+is a great/easy way to do it.
+
