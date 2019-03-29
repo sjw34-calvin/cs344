@@ -1,0 +1,24 @@
+Sameer Mall
+Exercise 8.3
+03/29
+
+a. Compare and contrast Seaborn vs. MatPlotLib.
+-> Seaborn builds on top on Matplotlib and introduces additional plot types. It also makes the traditional Matplotlib plots
+look a bit prettier. Seaborn also introduces other plot types that MatPlot does not have.
+
+b. How big is this dataset and does it seem of an appropriate size for this problem?
+-> There are 397 cars in this data set. The aim of this model is to predict the fuel efficiency of the late-1970's and
+and early 1980s automobiles. The years of the cars range from 70 to 82 (which is what we want). In addition, all the other
+features also have good variability thus making it an appropriate data set for this problem.
+
+c. Explain what the prescribed normalization of the data does.
+-> As I mentioned in the previous explanation there are different ranges and units for each of the features. This makes
+training the model more difficult, and it makes the resulting model dependent on the choice of units used in the input.
+It is best to used the normalized data to train the model to ensure consistency.
+
+d. Is this an example of a linear regression model?
+No it is not because there are two densely connected hidden layers, and an output layer. In each of the layers relu is used,
+which means this is a non-linear model.
+
+e. In their conclusion, they claim that smaller datasets “prefer” smaller networks. Do you agree? Explain your answer.
+If we have a smaller data set and there will also be fewer hidden layers and this is to avoid over fitting.

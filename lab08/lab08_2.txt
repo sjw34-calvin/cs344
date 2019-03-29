@@ -1,0 +1,61 @@
+Sameer Mall
+Exercise 8.2
+03/29
+
+a. They recommend FTRL for L1 optimization, but the code specifies the same rate (learning_rate) for all runs.
+How is FTRL managing the learning rate?
+-> FTRL is gradient-based optimization for high dimensional linear models. This algorithm has the benefit of scaling the
+learning rate differently for different coefficients, which is useful if some features rarely take non-zero values.
+
+b. What good does the bucketing/binning do?
+-> Essentially breaks a feature into segments. The features values then become bucket indices. These indices are considered
+to be discrete features. The number of buckets is fixed so it does not fluctuate with data. Bucketing will basically
+buckets ('segments') data with similar features into one bucket. This makes it easier to manage the data by dividing them
+into specific ranges.
+
+c. Submit your solutions to tasks 1–2. Did you find their task 1 bucketing to make sense? Identify one unique feature
+cross for task 2 and explain how it could be useful.
+
+Task 1 Solution:
+
+  # Divide latitude into 10 buckets.
+  bucketized_latitude = tf.feature_column.bucketized_column(
+    latitude, boundaries=get_quantile_based_boundaries(
+      training_examples["latitude"], 10))
+
+  # Divide housing_median_age into 7 buckets.
+  bucketized_housing_median_age = tf.feature_column.bucketized_column(
+    housing_median_age, boundaries=get_quantile_based_boundaries(
+      training_examples["housing_median_age"], 7))
+
+  # Divide median_income into 7 buckets.
+  bucketized_median_income = tf.feature_column.bucketized_column(
+    median_income, boundaries=get_quantile_based_boundaries(
+      training_examples["median_income"], 7))
+
+  # Divide rooms_per_person into 7 buckets.
+  bucketized_rooms_per_person = tf.feature_column.bucketized_column(
+    rooms_per_person, boundaries=get_quantile_based_boundaries(
+      training_examples["rooms_per_person"], 7))
+
+Final RMSE: 87.30
+
+The concept of bucketing itself makes sense but I do not understand why they divide latitude and longitude into 10 buckets
+but divide all other real valued features into 7 buckets. I understand they want to choose bucket boundaries in such a way
+that each bucket has the same number of buckets but why the 7 vs. 10? (Idk.. about this)
+
+Task 2 Solution:
+
+Feature Crosses:
+
+Crossing two (or more) features is a clever way to learn non-linear relations using a linear model.
+In this particular example: if we just use the feature latitude for learning, the model might learn that city blocks at
+a particular latitude (or within a particular range of latitudes since we have bucketized it) are more likely to be
+expensive than others. Similarly for the feature longitude. However, if we cross longitude by latitude, the crossed
+feature represents a well defined city block. If the model learns that certain city blocks (within range of latitudes
+and longitudes) are more likely to be more expensive than others, it is a stronger signal than two features considered
+individually.
+
+After implementing this cross feature and training the model the RMSE was significantly lower (77.92) than when training
+the model without this cross feature as related to median house value.
+

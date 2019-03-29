@@ -1,0 +1,51 @@
+Sameer Mall
+Exercise 8.1
+03/29
+
+a) What does the Pearson correlation coefficient measure? Identify one example value from the correlation table you
+compute and explain why it makes sense.
+
+-> It is the measure of the linear correlation between variables.
+-1.0 = perfect negative correlation
+0.0 = no correlation
+1.0 = prefect positive correlation
+"Population" and "total_rooms" has a correlation of 0.9, which indicates a high positive correlation which makes sense
+because as the population increases one would expect the number of total rooms to increase too.
+
+b) Submit your solutions to tasks 1–2. Include the features you selected for task 1 and the synthetic features you
+developed for task 2; include the final RMS errors but not the training output. Did you beat the Google-provided baselines?
+
+Task 1:
+minimal_features = [
+  "median_income",
+  "latitude",
+]
+
+Final RMSE: 166.28
+This RMSE is almost the same as the Google-provided baseline.
+
+Task 2:
+
+def select_and_transform_features(source_df):
+  LATITUDE_RANGES = zip(range(32, 40), range(33, 42))
+  selected_examples = pd.DataFrame()
+  selected_examples["median_income"] = source_df["median_income"]
+  for r in LATITUDE_RANGES:
+    selected_examples["latitude_%d_to_%d" % r] = source_df["latitude"].apply(
+      lambda l: 1.0 if l >= r[0] and l < r[1] else 0.0)
+  return selected_examples
+
+selected_training_examples = select_and_transform_features(training_examples)
+selected_validation_examples = select_and_transform_features(validation_examples)
+
+_ = train_model(
+    learning_rate=0.02,
+    steps=500,
+    batch_size=5,
+    training_examples=selected_training_examples,
+    training_targets=training_targets,
+    validation_examples=selected_validation_examples,
+    validation_targets=validation_targets)
+
+Final RMSE: 87.15
+The google provided RMSE was about 140.75 and the RMSE for my synthetic feature was about half that at 87.15.
