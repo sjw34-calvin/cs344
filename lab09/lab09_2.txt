@@ -1,0 +1,32 @@
+Sameer Mall
+Exercise 9.2
+04/05
+
+a.    Why are we regularizing with respect to sparsity?
+It reduces the size of the model by increasing the sparsity. In addition, it also reduces complexity by encouraging weights
+to be exactly zero. For linear models such as regression, a zero weight is equivalent to not using the corresponding feature at all.
+In addition, to avoid over fitting, the resulting model will be more efficient.
+
+b.    How does L1 regularization increase sparsity?
+In a database, sparse cells are not always technically empty - they often contain a "0" digit. What regularization does is
+that features that are not neccessarily used a ton are given smaller weights. This also avoids over fitting.
+
+When penalizing a model using the L2 norm, it is highly unlikely that anything will ever be set to zero.
+Is is not so much that L1 penalties encourage sparsity, but that L2 penalties in some sense discourage sparsity by yeilding
+diminishing returns as elements are moved closer to zero
+
+c.    Task 1: Here, just report the best log loss value / model size you can get and what gamma value you used to get them.
+
+linear_classifier = train_linear_classifier_model(
+    learning_rate=0.1,
+    regularization_strength=0.1,
+    steps=300,
+    batch_size=100,
+    feature_columns=construct_feature_columns(),
+    training_examples=training_examples,
+    training_targets=training_targets,
+    validation_examples=validation_examples,
+    validation_targets=validation_targets)
+
+Final LogLoss value: 0.24
+Model Size: 749
