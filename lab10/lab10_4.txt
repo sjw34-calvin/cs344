@@ -1,0 +1,49 @@
+Sameer Mall
+Exercise 10.3
+04/17/19
+
+Questions:
+
+a.    Task 1: Is a linear model ever preferable to a deep NN model?
+A linear model may be preferable when we do not have large data set, which is true in this case. NN's usually have a hidden \
+layer which require a large data set for its optimization. In this we only have 50 informative terms that compose our
+model vocabulary, hence the use of a linear model could prove to be preferable. Linear models are also much faster to train
+than deep NN models.
+
+b.    Task 2: Does the NN model do better than the linear model?
+Linear model on the testing set resulted in a 78.5% accuracy which is quite good.
+However, the NN ended up doing better with a 88% accuracy on the testing set. (I had thought it wouldn't because of the small
+data set, hence the whole point of using a linear model?)
+
+c.    Task 3: Do embeddings do much good for sentiment analysis tasks?
+An embedding column takes sparse data as input and returns a lower-dimensional dense vector as output. It is also usually the most
+efficient option to use on sparse data.
+In this case, no it does not. The accuracy on the test set was 78.2% which is lower than both the linear model and the NN model.
+
+d.    Tasks 4–5: Name two words that have similar embeddings and explain why that makes sense.
+Awful/horrible seem to have similar embeddings and appear in close proximity on the graph. This makes sense because both of
+those words have a negative association and I can see them being used in a similar way in movie reviews.
+
+e.    Task 6: Report your best hyper-parameters and their resulting performance.
+classifier = tf.estimator.DNNClassifier(
+  feature_columns=feature_columns,
+  hidden_units=[5,5],
+  optimizer=my_optimizer
+)
+Test set metrics:
+loss 10.428867
+accuracy_baseline 0.5
+global_step 1000
+recall 0.75904
+auc 0.89597243
+prediction/mean 0.45544758
+precision 0.8504841
+label/mean 0.5
+average_loss 0.4171547
+auc_precision_recall 0.89252365
+accuracy 0.8128
+
+I tried playing around with the number of hidden layers. I increased them from 10 to 20 because at some point they had mentioned
+that having more hidden layers could result in a higher accuracy but it went from about 78% accuracy to 50%. I then changed
+my amount of hidden layers to 5 which got me the highest accuracy.
+f.    Optional Discussion: You can skip this section.

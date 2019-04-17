@@ -1,0 +1,69 @@
+Sameer Mall
+Exercise 10.2
+04/15/19
+
+a.    What does AdaGrad do to boost performance?
+AdaGrad has the ability to modify the learning rate adaptively for each coefficient in a model, monotonically lowering
+the effective learning rate. This works great for convex problems, but isn't always ideal for the non-convex problem
+NN training.
+
+b.    Tasks 1–4: Report your best hyperparameter settings and their resulting performance.
+TASK 1:
+_ = train_nn_regression_model(
+    my_optimizer=tf.train.GradientDescentOptimizer(learning_rate=0.0007),
+    steps=5000,
+    batch_size=70,
+    hidden_units=[10, 10],
+    training_examples=normalized_training_examples,
+    training_targets=training_targets,
+    validation_examples=normalized_validation_examples,
+    validation_targets=validation_targets)
+
+    Final RMSE (on training data):   87.44
+    Final RMSE (on validation data): 86.65
+
+TASK 2:
+AdaGrad:
+_, adagrad_training_losses, adagrad_validation_losses = train_nn_regression_model(
+    my_optimizer=tf.train.AdagradOptimizer(learning_rate=0.5),
+    steps=500,
+    batch_size=100,
+    hidden_units=[10, 10],
+    training_examples=normalized_training_examples,
+    training_targets=training_targets,
+    validation_examples=normalized_validation_examples,
+    validation_targets=validation_targets)
+Final RMSE (on training data):   69.29
+Final RMSE (on validation data): 68.72
+
+Adam:
+_, adam_training_losses, adam_validation_losses = train_nn_regression_model(
+    my_optimizer=tf.train.AdamOptimizer(learning_rate=0.009),
+    steps=500,
+    batch_size=100,
+    hidden_units=[10, 10],
+    training_examples=normalized_training_examples,
+    training_targets=training_targets,
+    validation_examples=normalized_validation_examples,
+    validation_targets=validation_targets)
+Final RMSE (on training data):   70.50
+Final RMSE (on validation data): 69.60
+
+AdaGrad performs better than Adam on this example.
+
+TASK 3:
+_ = train_nn_regression_model(
+    my_optimizer=tf.train.GradientDescentOptimizer(learning_rate=0.007),
+    steps=2500,
+    batch_size=100,
+    hidden_units=[10, 10],
+    training_examples=normalized_training_examples,
+    training_targets=training_targets,
+    validation_examples=normalized_validation_examples,
+    validation_targets=validation_targets)
+Final RMSE (on training data):   71.70
+Final RMSE (on validation data): 70.43
+
+TASK 4: DOES NOT EXIST
+
+c.    Optional Challenge: You can skip this exercise.

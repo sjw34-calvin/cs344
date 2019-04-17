@@ -1,0 +1,26 @@
+Sameer Mall
+Exercise 10.3
+04/15/19
+
+a.    Task 1: What does the confusion matrix show for this example?
+The confusion matrix shows which classes were misclassified as other classes.
+
+b.    Task 2: How does the TensorFlow network architecture differ from the Keras example given in class?
+      Report any improvements you can make over the baseline test set accuracy for this task.
+The Tensor Flow network architecture is much more complex than the keras one that was given in class.
+classifier = train_nn_classification_model(
+    learning_rate=0.05,
+    steps=1000,
+    batch_size=30,
+    hidden_units=[100, 100],
+    training_examples=training_examples,
+    training_targets=training_targets,
+    validation_examples=validation_examples,
+    validation_targets=validation_targets)
+
+    Final accuracy (on validation data): 0.94
+
+c.    Task 3: What differences can you see between the visualizations for 10 steps and 1000 steps?
+The visualization at 10 steps is basically just noise. There is absolutely no telling what the object in the image might
+be. This is also because 10 steps also gives 45% which is not a very well trained network. On the other hand, training the
+classifier for 1000 steps results in a 94% accuracy and much clearer visuals.

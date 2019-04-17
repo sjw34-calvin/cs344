@@ -1,0 +1,32 @@
+Sameer Mall
+Exercise 10.1
+04/15/19
+
+
+a.    Would you rather use TensorFlow or Keras to build your models?
+Keras because understanding the TensorFlow code is personally a lot more confusing for me. I also did not pay much attention
+to the TensorFlow code that I did in Colab because the examples used in class were also mainly Keras.
+
+b.    Tasks 1 & 2: Report your best hyper-parameter settings and their resulting performance on the testing dataset.
+            Task 1:
+            dnn_regressor = train_nn_regression_model(
+            learning_rate=0.001,
+            steps=2500,
+            batch_size=100,
+            hidden_units=[10, 10],
+            training_examples=training_examples,
+            training_targets=training_targets,
+            validation_examples=validation_examples,
+            validation_targets=validation_targets)
+
+            Final RMSE on training data: 98.60
+            FInal RMSE on validation data: 101.55
+
+            Task 2:
+            predict_testing_input_fn = lambda: my_input_fn(test_examples,
+                                               test_targets["median_house_value"],
+                                               num_epochs=1,
+                                               shuffle=False)
+            Final RMSE (on test data): 99.10.
+
+
